@@ -1,0 +1,12 @@
+<%= form_for [@project, @ticket] do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br />
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+  <br />
+  <%= f.label :status %>
+  <%= f.select :status, ['new', 'blocked', 'in_progress','fixed'], include_blank: true %>
+  <br />
+  <%= f.submit @ticket.new_record? ? "Create Ticket" : "Update Ticket" %>
+<% end %>

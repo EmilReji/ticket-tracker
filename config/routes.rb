@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root to: "projects#index"
 
   resources :projects do
-    resources :tickets
+    resources :tickets, except: [:index]
   end
+
+  resources :tickets, only: [:index]
 end

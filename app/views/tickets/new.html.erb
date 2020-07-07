@@ -1,0 +1,5 @@
+<h3>Create a New Ticket for <%= @project.name %></h3>
+
+<%= render 'form' %>
+
+<%= link_to @project.name, project_path(@project) %>

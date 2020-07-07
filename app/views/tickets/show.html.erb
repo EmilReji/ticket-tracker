@@ -1,0 +1,6 @@
+<h3><%= @project.name %></h3>
+
+<%= render 'ticket', ticket: @ticket %>
+
+<%= link_to "Back to " + @project.name, project_path(@project) %>
+

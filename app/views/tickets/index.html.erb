@@ -1,0 +1,9 @@
+<h3>Tickets:</h3>
+
+<ul>
+<% @tickets.each do |ticket| %>
+  <li>
+    <%= render "ticket", ticket: ticket %>
+  </li>
+<% end %>
+</ul>
