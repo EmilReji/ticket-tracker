@@ -1,7 +1,8 @@
 class TicketsController < ApplicationController
   before_action :set_project, except: [:index]
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-  
+  before_action :require_user, except: [:index, :show]
+
   def index # should get all tickets (rather than just tickets under one project); not nested 
     @tickets = Ticket.all
   end

@@ -7,11 +7,16 @@
 <% @projects.each do |project| %>
   <li>
     <%= link_to project.name, project_path(project) %>
-    <%= link_to "Edit", edit_project_path(project) %>
-    <%= link_to "Delete", project_path(project), method: :delete, data: { confirm: "Are you sure want to delete '#{project.name}'? It will wipe out all corresponding tickets as well." } %>
+    <% if is_logged_in? %>
+      <%= link_to "Edit", edit_project_path(project) %>
+      <%= link_to "Delete", project_path(project), method: :delete, data: { confirm: "Are you sure want to delete '#{project.name}'? It will wipe out all corresponding tickets as well." } %>
+    <% end %>
   </li>
 <% end %>
 </ul>
 <% end %>
 
-<%= link_to "Create Project", new_project_path %>
+<% if is_logged_in? %>
+  <%= link_to "Create Project", new_project_path %>
+<% end %>
+<br />

@@ -13,7 +13,9 @@
 <% end %>
 <% end %>
 
-<%= link_to "New Ticket", new_project_ticket_path(@project) %>
+<% if is_logged_in? %>
+  <%= link_to "New Ticket", new_project_ticket_path(@project) %>
+<% end %>
 <br />
 <%= link_to "Back To Projects", projects_path %>
 

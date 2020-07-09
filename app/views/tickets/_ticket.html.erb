@@ -9,6 +9,8 @@
   <% end %>
 </p>
 <p>Body: <%= ticket.body %></p>
-<p><%= link_to "Edit", edit_project_ticket_path(ticket.project, ticket) %></p>
-<p><%= link_to "Delete", project_ticket_path(ticket.project, ticket), method: :delete, data: { confirm: "Are you sure want to delete '#{ticket.name}'? It is unrecoverable." } %></p>
+<% if is_logged_in? %>
+  <p><%= link_to "Edit", edit_project_ticket_path(ticket.project, ticket) %></p>
+  <p><%= link_to "Delete", project_ticket_path(ticket.project, ticket), method: :delete, data: { confirm: "Are you sure want to delete '#{ticket.name}'? It is unrecoverable." } %></p>
+<% end %>
 <br />

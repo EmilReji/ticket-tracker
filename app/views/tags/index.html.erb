@@ -5,7 +5,9 @@
     <li>
       <p>Name: <%= tag.value %></p>    
       <p>Tickets: <%= tickets %></p>
-      <%= link_to 'Edit', edit_tag_path(tag) %> or <%= link_to 'Destroy', tag_path(tag), method: :delete, data: { confirm: "Are you sure want to delete '#{tag.value}? All tickets with this tag will lose it and it is unrecoverable." } %>    
+      <% if is_logged_in? %>
+        <%= link_to 'Edit', edit_tag_path(tag) %> or <%= link_to 'Destroy', tag_path(tag), method: :delete, data: { confirm: "Are you sure want to delete '#{tag.value}? All tickets with this tag will lose it and it is unrecoverable." } %>    
+      <% end %>
     </li>
   <% end %>
 </ul>
