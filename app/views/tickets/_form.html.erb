@@ -11,5 +11,8 @@
   <%= f.label :tags %>
   <%= f.collection_check_boxes :tag_ids, @tags, :id, :value, include_blank: true %>
   <br />
+  <%= f.label :assignee %>
+  <%= f.collection_select :assignee, @users, :id, :name, include_blank: true %>
+  <br />
   <%= f.submit @ticket.new_record? ? "Create Ticket" : "Update Ticket" %>
 <% end %>

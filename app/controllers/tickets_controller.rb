@@ -2,6 +2,7 @@ class TicketsController < ApplicationController
   before_action :set_project, except: [:index]
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   before_action :require_user, except: [:index, :show]
+  before_action :get_non_current_users, only: [:new, :edit]
 
   def index # should get all tickets (rather than just tickets under one project); not nested 
     @tickets = Ticket.all
@@ -19,7 +20,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(ticket_params)
     @ticket.project_id = @project.id
     @ticket.creator = current_user.id
-
+    
     if @ticket.save
       flash[:success] = "Your ticket was created."
       redirect_to project_ticket_path(@project, @ticket)
@@ -53,7 +54,7 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params
-    params.require(:ticket).permit(:name, :body, :status, tag_ids: [])
+    params.require(:ticket).permit(:name, :body, :status, :assignee, tag_ids: [])
   end
 
   def set_project
@@ -62,5 +63,9 @@ class TicketsController < ApplicationController
 
   def set_ticket
     @ticket = Ticket.find(params[:id])
+  end
+
+  def get_non_current_users
+    @users = User.all.filter { |user| user.id != current_user.id } || []
   end
 end
