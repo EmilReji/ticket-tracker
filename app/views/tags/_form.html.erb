@@ -1,0 +1,7 @@
+<%= form_for @tag do |f| %>
+  <%= f.label :value %>
+  <%= f.text_field :value %>
+  <br />
+  <%= f.submit @tag.new_record? ? "Create Tag" : "Update Tag" %>
+<% end %>
+

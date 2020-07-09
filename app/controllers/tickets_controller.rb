@@ -10,6 +10,7 @@ class TicketsController < ApplicationController
   end
 
   def new
+    @tags = Tag.all
     @ticket = Ticket.new
   end
 
@@ -28,6 +29,7 @@ class TicketsController < ApplicationController
   end
 
   def edit
+    @tags = Tag.all
   end
 
   def update
@@ -49,7 +51,7 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params
-    params.require(:ticket).permit(:name, :body, :status)
+    params.require(:ticket).permit(:name, :body, :status, tag_ids: [])
   end
 
   def set_project

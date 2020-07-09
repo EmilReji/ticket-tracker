@@ -41,7 +41,7 @@ RSpec.describe ProjectsController do
       expect(Project.first.description).to match("Test project 1 description")
 
     end
-    it "Redirects to the root path when input is valid" do
+    it "Redirects to the project path when input is valid" do
       post :create, params: { project: { name: "Test project 1", description: "Test project 1 description" } }
       expect(response).to redirect_to project_path(Project.first)   
     end
@@ -55,5 +55,23 @@ RSpec.describe ProjectsController do
       expect(response).to have_http_status(:ok)
       expect(response).to render_template(:new)
     end
+  end
+
+  describe "PATCH update" do
+    #before(:each) do
+      #@project = post :create, params: { project: { name: "Test project 1", description: "Test project 1 description" } }
+    #end
+
+    it "Update the project record when the input is valid" do
+      post :create, params: { project: { name: "Test project 1", description: "Test project 1 description" } }
+      patch :update, params: { project: { name: "Edited name", description: "Edited description" } }
+      # above patch not working: see notes
+
+      expect(Project.first.name).to match("Edited name")
+      expect(Project.first.description).to match("Edited description")
+    end
+    it "Redirects to project path when input is valid"
+    it "Doesn't update the project record when input is invalid"
+    it "Renders the edit template when input is invalid"
   end
 end

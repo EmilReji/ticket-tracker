@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   end
 
   resources :tickets, only: [:index]
+
+  resources :tags, except: [:show]
 end

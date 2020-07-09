@@ -8,5 +8,8 @@
   <%= f.label :status %>
   <%= f.select :status, ['new', 'blocked', 'in_progress','fixed'], include_blank: true %>
   <br />
+  <%= f.label :tags %>
+  <%= f.collection_check_boxes :tag_ids, @tags, :id, :value, include_blank: true %>
+  <br />
   <%= f.submit @ticket.new_record? ? "Create Ticket" : "Update Ticket" %>
 <% end %>
