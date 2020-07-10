@@ -1,5 +1,16 @@
 <h3>Tickets:</h3>
 
+<%= form_with url: tickets_path, method: "get", remote: true do %>
+  <p>
+    Show tickets from
+    <%= collection_select :project, :project_id, Project.all, :id, :name, include_blank: "All Projects" %>
+    with status
+    <%= select :project, :status, ['new', 'blocked', 'in_progress','fixed'], include_blank: "Any Status" %>
+    <%= submit_tag "Update" %>
+    <%= link_to "Clear Filters", tickets_path %>
+  </p>
+<% end %>
+
 <table>
   <thead>
     <th>Name</th>

@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
       redirect_to project_ticket_path(@project, @ticket)
     else
       flash[:error] = "The comment wasn't created!"
-      render "ticket#show"
+      render "tickets/show"
     end
   end
 

@@ -1,0 +1,54 @@
+(function() {
+  document.querySelector("tbody").remove();
+  document.querySelector("table").appendChild(document.createElement("tbody"));
+  console.log("<%= @tickets.map { |ticket| ticket.name }.join(', ') %>");
+  <% if @tickets.length == 0 %>
+    var emptyText = document.createElement("p");
+    emptyText.setAttribute("id", "emptyText")
+    emptyText.appendChild(document.createTextNode("There are no tickets matching the selected filters."));
+    document.querySelector("table").appendChild(emptyText);
+  <% else %>
+  <% @tickets.each do |ticket| %>
+    if (document.querySelector("#emptyText")) document.querySelector("#emptyText").remove();
+    
+    var tr = document.createElement("tr");
+    
+    var name = document.createElement("td");
+    var nameLink = document.createElement("a");
+    nameLink.setAttribute("href", "<%= project_ticket_path(ticket.project, ticket) %>");
+    nameLink.appendChild(document.createTextNode("<%= ticket.name %>"));
+    name.appendChild(nameLink);
+    tr.appendChild(name);
+    
+    var assignee = document.createElement("td");
+    var assigneeText = document.createTextNode("TEMP TEXT");
+    assignee.appendChild(assigneeText);
+    tr.appendChild(assignee);
+
+    var statusNode = document.createElement("td");
+    var statusText = document.createTextNode("<%= ticket.status %>");
+    statusNode.appendChild(statusText);
+    tr.appendChild(statusNode);
+
+    var tags = document.createElement("td");
+    var tagsText = document.createTextNode("<%= ticket.tags.map(&:value).join(', ') %>");
+    tags.appendChild(tagsText);
+    tr.appendChild(tags);
+
+    var links = document.createElement("td");
+    var editLink = document.createElement("a");
+    editLink.setAttribute("href", "<%= edit_project_ticket_path(ticket.project, ticket) %>");
+    editLink.appendChild(document.createTextNode("Edit"));
+    var deleteLink = document.createElement("a");
+    deleteLink.setAttribute("href", "<%= project_ticket_path(ticket.project, ticket) %>");
+    deleteLink.appendChild(document.createTextNode("Delete"));
+
+    links.appendChild(editLink);
+    links.appendChild(document.createTextNode(" "))
+    links.appendChild(deleteLink);
+    tr.appendChild(links);
+
+    document.querySelector("tbody").appendChild(tr);
+  <% end %>
+  <% end %>
+})();
