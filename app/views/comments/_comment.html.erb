@@ -1,0 +1,7 @@
+<p><%= comment.body %></p>
+<p> Posted by <%= comment.creator.name %> on <%= comment.created_at %></p>
+<% if current_user == comment.creator %>
+  <%= link_to 'Edit', edit_project_ticket_comment_path(project, ticket, comment) %>
+  <%= link_to 'Delete', project_ticket_comment_path(project, ticket, comment), method: :delete, data: { confirm: "Are you sure want to delete this comment? It is unrecoverable." } %>
+<% end %>
+<br />

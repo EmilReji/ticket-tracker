@@ -1,0 +1,6 @@
+<%= form_for [project, ticket, comment] do |f| %>
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+  <br />
+  <%= f.submit comment.new_record? ? "Create Comment" : "Edit Comment" %>
+<% end %>

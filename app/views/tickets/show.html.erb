@@ -4,3 +4,12 @@
 
 <%= link_to "Back to " + @project.name, project_path(@project) %>
 
+<h4>Comments</h4>
+
+<% @ticket.comments.each do |comment| %>
+  <%= render 'comments/comment', comment: comment, ticket: @ticket, project: @project %>
+<% end %>
+
+<h4>Add A Comment</h4>
+<%= render 'comments/form', comment: Comment.new, ticket: @ticket, project: @project %>
+
