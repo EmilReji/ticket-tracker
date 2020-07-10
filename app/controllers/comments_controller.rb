@@ -23,11 +23,19 @@ class CommentsController < ApplicationController
   end
 
   def update
-    
+    if @comment.update(comment_params)
+      flash[:success] = "The comment was updated!"
+      redirect_to project_ticket_path(@project, @ticket)
+    else
+      flash[:error] = "The comment wasn't updated!"
+      render "edit"
+    end
   end
 
   def destroy
-
+    @comment.destroy
+    flash[:success] = "The comment was deleted!"
+    redirect_to project_ticket_path(@project, @ticket)
   end
 
   private

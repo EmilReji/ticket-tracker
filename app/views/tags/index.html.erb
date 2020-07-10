@@ -1,15 +1,27 @@
 <h3>Tags</h3>
 
-<ul>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Tickets</th>
+    <th></th>
+  </thead>
+  <tbody>
   <% @tags_data.each do |tag, tickets| %>
-    <li>
-      <p>Name: <%= tag.value %></p>    
-      <p>Tickets: <%= tickets %></p>
+  <tr>
+    <td>Name: <%= tag.value %></td>
+    <td>Tickets: <%= tickets %></td>
+    <td>
       <% if is_logged_in? %>
         <%= link_to 'Edit', edit_tag_path(tag) %> or <%= link_to 'Destroy', tag_path(tag), method: :delete, data: { confirm: "Are you sure want to delete '#{tag.value}? All tickets with this tag will lose it and it is unrecoverable." } %>    
       <% end %>
-    </li>
+    </td>
+  </tr>
   <% end %>
-</ul>
+  </tbody>
+</table>
+</br>
 
-<%= link_to 'New Tag', new_tag_path %>
+<% if is_logged_in? %>
+  <%= link_to 'New Tag', new_tag_path %>
+<% end %>

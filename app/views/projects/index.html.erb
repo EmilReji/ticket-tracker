@@ -1,22 +1,26 @@
 <h3>Projects:</h3>
 
-<% if @projects.empty? %>
-
-<% else %>
-<ul>
-<% @projects.each do |project| %>
-  <li>
-    <%= link_to project.name, project_path(project) %>
-    <% if is_logged_in? %>
-      <%= link_to "Edit", edit_project_path(project) %>
-      <%= link_to "Delete", project_path(project), method: :delete, data: { confirm: "Are you sure want to delete '#{project.name}'? It will wipe out all corresponding tickets as well." } %>
-    <% end %>
-  </li>
-<% end %>
-</ul>
-<% end %>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Open Tickets</th>
+    <th>Total Tickets</th>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+    <tr>
+      <td>
+        <%= link_to project.name, project_path(project) %>
+        <p><%= project.description %></p>
+      </td>
+      <td>TEMP VAL</td>
+      <td><%= project.tickets.length %></td>
+    </tr>
+    <% end %>  
+  </tbody>
+</table>
 
 <% if is_logged_in? %>
-  <%= link_to "Create Project", new_project_path %>
+  <%= link_to "New Project", new_project_path %>
 <% end %>
 <br />

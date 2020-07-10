@@ -1,0 +1,16 @@
+<p>Ticket Name: <%= link_to ticket.name, project_ticket_path(ticket.project, ticket) %></p>
+<p>Project Name: <%= link_to ticket.project.name, project_path(ticket.project) %></p>
+<p>Status: <%= ticket.status %></p>
+<p>Tags: 
+  <% if ticket.tags.empty? %>
+    None
+  <% else %>
+    <%= ticket.tags.map(&:value).join(', ') %>
+  <% end %>
+</p>
+<p>Body: <%= ticket.body %></p>
+<% if is_logged_in? %>
+  <p><%= link_to "Edit", edit_project_ticket_path(ticket.project, ticket) %></p>
+  <p><%= link_to "Delete", project_ticket_path(ticket.project, ticket), method: :delete, data: { confirm: "Are you sure want to delete '#{ticket.name}'? It is unrecoverable." } %></p>
+<% end %>
+<br />

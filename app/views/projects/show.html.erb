@@ -3,16 +3,34 @@
 <h4>Description</h4>
 
 <p><%= @project.description %></p>
+<% if is_logged_in? %>
+  <p>
+    <%= link_to "Edit", edit_project_path(@project) %>
+    <%= link_to "Delete", project_path(@project), method: :delete, data: { confirm: "Are you sure want to delete '#{@project.name}'? It will wipe out all corresponding tickets as well." } %>
+  </p>
+<% end %>
+<br />
 
 <h4>Tickets: </h4>
 <% if @project.tickets.empty? %>
   <p>This project has zero tickets!</p>
 <% else %>
-<% @project.tickets.each do |ticket| %>
-  <%= render "tickets/ticket", ticket: ticket %>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Assignee</th>
+    <th>Status</th>
+    <th>Tags</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @project.tickets.each do |ticket| %>
+      <%= render "tickets/ticket", ticket: ticket %>
+    <% end %>
+  </tbody>
+</table>
 <% end %>
-<% end %>
-
+</br>
 <% if is_logged_in? %>
   <%= link_to "New Ticket", new_project_ticket_path(@project) %>
 <% end %>

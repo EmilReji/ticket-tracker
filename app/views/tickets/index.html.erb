@@ -1,9 +1,16 @@
 <h3>Tickets:</h3>
 
-<ul>
-<% @tickets.each do |ticket| %>
-  <li>
-    <%= render "ticket", ticket: ticket %>
-  </li>
-<% end %>
-</ul>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Assignee</th>
+    <th>Status</th>
+    <th>Tags</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @tickets.each do |ticket| %>
+      <%= render "ticket", ticket: ticket %>
+    <% end %>  
+  </tbody>
+</table>
