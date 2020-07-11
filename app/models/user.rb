@@ -7,5 +7,5 @@ class User < ApplicationRecord
   validates :password, presence: true, on: :create, length: {minimum: 5}
   validates :password, confirmation: { case_sensitive: true }
 
-  has_many :comments, foreign_key: :creator, dependent: :delete_all
+  has_many :comments, foreign_key: :creator
 end

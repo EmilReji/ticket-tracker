@@ -13,6 +13,12 @@
   </p>
 <% end %>
 
+<% if @tickets.empty? %>
+  <p>There are no tickets in the system! Please add some first.</p>
+  <script>
+    document.querySelector("input[type='submit']").disabled = true;
+  </script>
+<% else %>
 <table>
   <thead>
     <th>Name</th>
@@ -27,3 +33,4 @@
     <% end %>  
   </tbody>
 </table>
+<% end %>

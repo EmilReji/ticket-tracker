@@ -1,5 +1,8 @@
 <h3>Tags</h3>
 
+<% if @tags_data.empty? %>
+  <p>There are no tags in the system! Please add some first.</p>
+<% else %>
 <table>
   <thead>
     <th>Name</th>
@@ -21,6 +24,7 @@
   </tbody>
 </table>
 </br>
+<% end %>
 
 <% if is_logged_in? %>
   <%= link_to 'New Tag', new_tag_path %>
