@@ -6,6 +6,8 @@
     <%= collection_select :project, :project_id, Project.all, :id, :name, include_blank: "All Projects" %>
     with status
     <%= select :project, :status, ['new', 'blocked', 'in_progress','fixed'], include_blank: "Any Status" %>
+    tagged
+    <%= collection_select :project, :tag_id, @tags, :id, :value, include_blank: @tag_val || "-" %>
     <%= submit_tag "Update" %>
     <%= link_to "Clear Filters", tickets_path %>
   </p>

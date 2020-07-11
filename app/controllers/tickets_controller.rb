@@ -5,23 +5,38 @@ class TicketsController < ApplicationController
   before_action :get_non_current_users, only: [:new, :edit]
 
   def index # should get all tickets (rather than just tickets under one project); not nested 
-    if params[:project]
+    @tags = Tag.all
+    @tickets = Ticket.all
+
+    if params[:tag_id] # means we recieved query parameter from tags page link
+      tag_id = params[:tag_id] || ''
+
+      @tickets = @tickets.select do |ticket|
+        (tag_id == '' || ticket.tags.map(&:id).include?(tag_id.to_i))
+      end
+
+      @tag_val = Tag.find(tag_id)&.value
+      @tags = @tags.filter { |tag| tag.id != tag_id.to_i } 
+
+      respond_to do |f|
+        f.html
+      end
+    elsif params[:project] # means we recieved ajax request when filters on tickets changed and update clicked
       project_id = params[:project][:project_id] || '' 
       status = params[:project][:status] || ''
-
-      @tickets = Ticket.all.select do |ticket|
+      tag_id = params[:project][:tag_id] || ''
+      
+      @tickets = @tickets.select do |ticket|
         (project_id == '' || ticket.project_id.to_s == project_id) && 
-        (status == '' || ticket.status == status) 
+        (status == '' || ticket.status == status) &&
+        (tag_id == '' || ticket.tags.map(&:id).include?(tag_id.to_i))
       end
     
       respond_to do |f|
          f.js
       end
-    else
-      @tickets = Ticket.all
     end
-
-    p @tickets.length
+    # if neither exists, means simply show all tickets using basic html form
   end
 
   def show

@@ -10,7 +10,7 @@
   <% @tags_data.each do |tag, tickets| %>
   <tr>
     <td>Name: <%= tag.value %></td>
-    <td>Tickets: <%= tickets %></td>
+    <td><%= link_to tickets.to_s, tickets_path(tag_id: tag.id) %></td>
     <td>
       <% if is_logged_in? %>
         <%= link_to 'Edit', edit_tag_path(tag) %> or <%= link_to 'Destroy', tag_path(tag), method: :delete, data: { confirm: "Are you sure want to delete '#{tag.value}? All tickets with this tag will lose it and it is unrecoverable." } %>    
