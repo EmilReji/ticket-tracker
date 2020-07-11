@@ -1,24 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Intro
 
-Things you may want to cover:
+This is a ticket tracker app created in rails. The app operates in a similar manner to Github's issues functionality. The db is setup using postgres.
 
-* Ruby version
+## Demo
 
-* System dependencies
+Click [here](https://limitless-wildwood-09421.herokuapp.com/) to find the heroku demo app.
 
-* Configuration
+## Setup
 
-* Database creation
+Note if any of the command below fails, try preceding them with `bundle exec`.
 
-* Database initialization
+Run `bundle install` to install the required Gemfiles. Make sure your either using Ruby version 2.7.1. If not, update the Gemfile so the Ruby version matches your own.
 
-* How to run the test suite
+Then run `rake db:migrate` to run the migrations and ensure the database schema is setup.
 
-* Services (job queues, cache servers, search engines, etc.)
+Then run `rake db:seed` to load the db/seeds.rb data into the database.
 
-* Deployment instructions
+Finally, run `rails server` to start the app.
 
-* ...
+## Tests
+
+A few rspec tests have been created in the spec directory. Run them like so: `rspec`.

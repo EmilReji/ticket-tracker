@@ -22,7 +22,7 @@
       tr.appendChild(name);
       
       var assignee = document.createElement("td");
-      var assigneeText = document.createTextNode("TEMP TEXT");
+      var assigneeText = document.createTextNode("<%= User.find(ticket.assignee).name %>");
       assignee.appendChild(assigneeText);
       tr.appendChild(assignee);
 

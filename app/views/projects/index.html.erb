@@ -6,7 +6,7 @@
 <table>
   <thead>
     <th>Name</th>
-    <th>Open Tickets</th>
+    <th>Description</th>
     <th>Total Tickets</th>
   </thead>
   <tbody>
@@ -14,9 +14,8 @@
     <tr>
       <td>
         <%= link_to project.name, project_path(project) %>
-        <p><%= project.description %></p>
       </td>
-      <td>TEMP VAL</td>
+      <td><%= shorten_desc(project) %></td>
       <td><%= project.tickets.length %></td>
     </tr>
     <% end %>  

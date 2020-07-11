@@ -1,16 +1,13 @@
 module ApplicationHelper
-=begin
-  def display_datetime(dt)
-    if is_logged_in? && !current_user.time_zone.blank?
-      dt = dt.in_time_zone(current_user.time_zone)
-    end
-
-    dt.strftime("%m/%d/%Y %l:%M%P %Z") # 03/14/2013 9:09pm
-  end
-
-=end
   def get_tag_str(ticket)
     return ticket.tags.order(:value).map(&:value).join(', ')
   end
 
+  def shorten_desc(project, len = 10)
+    if project.description.length > len
+      return project.description[0..10] + '...'
+    else
+      return project.description
+    end
+  end
 end

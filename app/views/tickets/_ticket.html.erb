@@ -2,7 +2,7 @@
   <td>
     <%= link_to ticket.name, project_ticket_path(ticket.project, ticket) %>
   </td>
-  <td>TEMP VAL</td>
+  <td><%= User.find(ticket.assignee).name %></td>
   <td><%= ticket.status %></td>
   <td>
     <% if ticket.tags.empty? %>
