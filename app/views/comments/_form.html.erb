@@ -2,5 +2,8 @@
   <%= f.label :body %>
   <%= f.text_area :body %>
   <br />
+  <%= f.label "Update ticket status" %>
+  <%= select :ticket, :status, ['new', 'blocked', 'in_progress','fixed'] %>
+  <br />
   <%= f.submit comment.new_record? ? "Create Comment" : "Edit Comment" %>
 <% end %>

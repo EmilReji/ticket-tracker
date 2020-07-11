@@ -5,8 +5,6 @@ class TicketsController < ApplicationController
   before_action :get_non_current_users, only: [:new, :edit]
 
   def index # should get all tickets (rather than just tickets under one project); not nested 
-    p params
-
     if params[:project]
       project_id = params[:project][:project_id] || '' 
       status = params[:project][:status] || ''

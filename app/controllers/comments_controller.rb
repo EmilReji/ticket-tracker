@@ -8,9 +8,10 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.creator = current_user
+    @ticket.status = params[:ticket][:status] 
     @comment.ticket = @ticket
-
-    if @comment.save
+    
+    if @comment.save && @ticket.save
       flash[:success] = "The comment was created!"
       redirect_to project_ticket_path(@project, @ticket)
     else
@@ -23,7 +24,9 @@ class CommentsController < ApplicationController
   end
 
   def update
-    if @comment.update(comment_params)
+    @ticket.status = params[:ticket][:status]
+    
+    if @comment.update(comment_params) && @ticket.save
       flash[:success] = "The comment was updated!"
       redirect_to project_ticket_path(@project, @ticket)
     else
