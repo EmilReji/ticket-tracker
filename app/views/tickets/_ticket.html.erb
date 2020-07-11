@@ -8,7 +8,7 @@
     <% if ticket.tags.empty? %>
       None
     <% else %>
-      <%= ticket.tags.map(&:value).join(', ') %>
+      <%= get_tag_str(ticket) %>
     <% end %>
   </td>
   <td>

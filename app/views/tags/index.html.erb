@@ -10,13 +10,19 @@
     <th></th>
   </thead>
   <tbody>
-  <% @tags_data.each do |tag, tickets| %>
+  <% @tags_data.each do |tag| %>
   <tr>
-    <td>Name: <%= tag.value %></td>
-    <td><%= link_to tickets.to_s, tickets_path(tag_id: tag.id) %></td>
+    <td><%= tag[:value] %></td>
+    <td>
+      <% if tag[:tickets_count].to_i > 0 %>
+        <%= link_to tag[:tickets_count].to_s, tickets_path(tag_id: tag[:id]) %>
+      <% else %>
+        <%= 0 %>
+      <% end %> 
+    </td>
     <td>
       <% if is_logged_in? %>
-        <%= link_to 'Edit', edit_tag_path(tag) %> or <%= link_to 'Destroy', tag_path(tag), method: :delete, data: { confirm: "Are you sure want to delete '#{tag.value}? All tickets with this tag will lose it and it is unrecoverable." } %>    
+        <%= link_to 'Edit', edit_tag_path(tag[:id]) %> or <%= link_to 'Destroy', tag_path(tag[:id]), method: :delete, data: { confirm: "Are you sure want to delete '#{tag[:name]}? All tickets with this tag will lose it and it is unrecoverable." } %>    
       <% end %>
     </td>
   </tr>

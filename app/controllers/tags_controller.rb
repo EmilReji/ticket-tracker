@@ -3,9 +3,11 @@ class TagsController < ApplicationController
   before_action :require_user, except: [:index]
 
   def index
-    @tags_data = Tag.all.map do |tag|
-      [tag, tag.tickets.length] 
+    @tags_data = Tag.eager_load(:tickets).group(:id, :value).count(:ticket_id).map do |data, count|
+      { id: data[0], value: data[1], tickets_count: count }
     end
+   
+    @tags_data.sort_by! { |tag| tag[:value] }
   end
 
   def new

@@ -3,9 +3,9 @@ class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   before_action :require_user, except: [:index, :show]
   before_action :get_non_current_users, only: [:new, :edit]
+  before_action :set_tags, only: [:index, :new, :edit]
 
   def index # should get all tickets (rather than just tickets under one project); not nested 
-    @tags = Tag.all
     @tickets = Ticket.all
 
     if params[:tag_id] # means we recieved query parameter from tags page link
@@ -43,7 +43,6 @@ class TicketsController < ApplicationController
   end
 
   def new
-    @tags = Tag.all
     @ticket = Ticket.new
   end
 
@@ -63,7 +62,6 @@ class TicketsController < ApplicationController
   end
 
   def edit
-    @tags = Tag.all
   end
 
   def update
@@ -86,6 +84,10 @@ class TicketsController < ApplicationController
 
   def ticket_params
     params.require(:ticket).permit(:name, :body, :status, :assignee, tag_ids: [])
+  end
+
+  def set_tags
+    @tags = Tag.order(:value)
   end
 
   def set_project

@@ -9,4 +9,8 @@ module ApplicationHelper
   end
 
 =end
+  def get_tag_str(ticket)
+    return ticket.tags.order(:value).map(&:value).join(', ')
+  end
+
 end
